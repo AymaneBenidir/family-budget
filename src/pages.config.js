@@ -1,17 +1,19 @@
+import Analysis from './pages/Analysis';
 import Dashboard from './pages/Dashboard';
 import Expenses from './pages/Expenses';
-import Incomes from './pages/Incomes';
 import Goals from './pages/Goals';
-import Analysis from './pages/Analysis';
+import Incomes from './pages/Incomes';
+import Reports from './pages/Reports';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
+    "Analysis": Analysis,
     "Dashboard": Dashboard,
     "Expenses": Expenses,
-    "Incomes": Incomes,
     "Goals": Goals,
-    "Analysis": Analysis,
+    "Incomes": Incomes,
+    "Reports": Reports,
 }
 
 export const pagesConfig = {

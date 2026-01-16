@@ -4,7 +4,7 @@ import { createPageUrl } from './utils';
 import { base44 } from '@/api/base44Client';
 import { 
   LayoutDashboard, Receipt, Wallet, Target, BarChart3, 
-  Menu, X, LogOut, User, ChevronDown
+  Menu, X, LogOut, User, ChevronDown, FileText
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,7 @@ const navigation = [
   { name: 'Revenus', href: 'Incomes', icon: Wallet },
   { name: 'Objectifs', href: 'Goals', icon: Target },
   { name: 'Analyse', href: 'Analysis', icon: BarChart3 },
+  { name: 'Rapports', href: 'Reports', icon: FileText },
 ];
 
 export default function Layout({ children, currentPageName }) {
