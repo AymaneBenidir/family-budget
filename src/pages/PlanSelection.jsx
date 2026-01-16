@@ -15,6 +15,15 @@ export default function PlanSelection() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        // Check if user is authenticated
+        const isAuth = await base44.auth.isAuthenticated();
+        
+        if (!isAuth) {
+          // Not authenticated → redirect to landing
+          window.location.href = createPageUrl('Landing');
+          return;
+        }
+
         const currentUser = await base44.auth.me();
         setUser(currentUser);
         
@@ -24,8 +33,7 @@ export default function PlanSelection() {
         }
       } catch (error) {
         console.error('Error fetching user:', error);
-        // Redirect to login if not authenticated
-        base44.auth.redirectToLogin(window.location.pathname);
+        window.location.href = createPageUrl('Landing');
       }
     };
 
