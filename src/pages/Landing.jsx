@@ -64,10 +64,13 @@ const premiumPlan = [
 export default function Landing() {
   const handleGetStarted = async () => {
     const isAuthenticated = await base44.auth.isAuthenticated();
+    
     if (isAuthenticated) {
-      window.location.href = createPageUrl('Dashboard');
+      // Redirect to plan selection or dashboard
+      window.location.href = createPageUrl('PlanSelection');
     } else {
-      base44.auth.redirectToLogin(createPageUrl('Dashboard'));
+      // Redirect to login, then to plan selection after signup
+      base44.auth.redirectToLogin(createPageUrl('PlanSelection'));
     }
   };
 
