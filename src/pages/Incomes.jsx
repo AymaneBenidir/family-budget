@@ -13,8 +13,9 @@ import {
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle 
 } from "@/components/ui/alert-dialog";
 import IncomeForm from '@/components/forms/IncomeForm';
+import AuthGuard from '@/components/AuthGuard';
 
-export default function Incomes() {
+function IncomesContent() {
   const queryClient = useQueryClient();
   const [formOpen, setFormOpen] = useState(false);
   const [editingIncome, setEditingIncome] = useState(null);

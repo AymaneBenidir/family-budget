@@ -14,6 +14,7 @@ import {
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle 
 } from "@/components/ui/alert-dialog";
 import GoalForm from '@/components/forms/GoalForm';
+import AuthGuard from '@/components/AuthGuard';
 
 const CATEGORIES = {
   food: { label: 'Alimentation', icon: '🍽️', color: 'emerald' },
@@ -28,7 +29,7 @@ const CATEGORIES = {
   other: { label: 'Autres', icon: '📦', color: 'slate' }
 };
 
-export default function Goals() {
+function GoalsContent() {
   const queryClient = useQueryClient();
   const [formOpen, setFormOpen] = useState(false);
   const [editingGoal, setEditingGoal] = useState(null);

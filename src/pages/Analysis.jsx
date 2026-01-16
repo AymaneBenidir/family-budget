@@ -12,6 +12,7 @@ import { format, subMonths, startOfMonth, endOfMonth, isWithinInterval, parseISO
 import { fr } from 'date-fns/locale';
 import { Loader2, TrendingUp, TrendingDown, Target, Wallet, FileDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import AuthGuard from '@/components/AuthGuard';
 
 const CATEGORY_COLORS = {
   food: '#10b981',
@@ -39,7 +40,7 @@ const CATEGORY_LABELS = {
   other: 'Autres'
 };
 
-export default function Analysis() {
+function AnalysisContent() {
   const [period, setPeriod] = useState('6');
 
   const { data: expenses = [], isLoading: loadingExpenses } = useQuery({
