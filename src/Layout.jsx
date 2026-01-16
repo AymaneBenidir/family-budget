@@ -46,10 +46,14 @@ export default function Layout({ children, currentPageName }) {
     base44.auth.logout();
   };
 
+  // Pages that should not show the sidebar
+  const publicPages = ['Landing', 'Home', 'SignIn', 'PlanSelection'];
+  const showSidebar = !publicPages.includes(currentPageName);
+
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Mobile sidebar overlay */}
-      {sidebarOpen && (
+      {showSidebar && sidebarOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
@@ -57,6 +61,7 @@ export default function Layout({ children, currentPageName }) {
       )}
 
       {/* Sidebar */}
+      {showSidebar && (
       <aside className={cn(
         "fixed top-0 left-0 z-50 h-full w-72 bg-white border-r border-slate-200 transform transition-transform duration-300 lg:translate-x-0",
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -148,10 +153,12 @@ export default function Layout({ children, currentPageName }) {
           </div>
         </div>
       </aside>
+      )}
 
       {/* Main content */}
-      <div className="lg:pl-72">
+      <div className={showSidebar ? "lg:pl-72" : ""}>
         {/* Mobile header */}
+        {showSidebar && (
         <header className="lg:hidden sticky top-0 z-30 bg-white border-b border-slate-200 px-4 py-3">
           <div className="flex items-center justify-between">
             <button 
@@ -169,6 +176,7 @@ export default function Layout({ children, currentPageName }) {
             <div className="w-10" />
           </div>
         </header>
+        )}
 
         {/* Page content */}
         <main>
