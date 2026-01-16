@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { Button } from "@/components/ui/button";
@@ -14,8 +14,14 @@ import {
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { cn } from "@/lib/utils";
+import PlanGuard from '../components/PlanGuard';
 
 export default function Reports() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    base44.auth.me().then(setUser).catch(() => {});
+  }, []);
   const [selectedMonth, setSelectedMonth] = useState(format(new Date(), 'yyyy-MM'));
   const [exportingPDF, setExportingPDF] = useState(false);
   const [exportingExcel, setExportingExcel] = useState(false);
@@ -192,33 +198,35 @@ export default function Reports() {
             </CardContent>
           </Card>
 
-          {/* Spending Analysis */}
-          <Card className="border-2 border-purple-200 hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-700">
-                <TrendingUp className="w-5 h-5" />
-                Analyse avancée (6 mois)
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm text-slate-600">
-                Analyse approfondie de vos habitudes de dépenses sur 6 mois avec score de 
-                santé financière, tendances et prédictions.
-              </p>
-              <Button 
-                onClick={loadSpendingAnalysis}
-                disabled={loadingAnalysis}
-                className="w-full bg-purple-600 hover:bg-purple-700"
-              >
-                {loadingAnalysis ? (
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                ) : (
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                )}
-                Analyser
-              </Button>
-            </CardContent>
-          </Card>
+          {/* Spending Analysis - Premium Feature */}
+          <PlanGuard requiredPlan="premium" user={user}>
+            <Card className="border-2 border-purple-200 hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-purple-700">
+                  <TrendingUp className="w-5 h-5" />
+                  Analyse avancée (6 mois)
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-sm text-slate-600">
+                  Analyse approfondie de vos habitudes de dépenses sur 6 mois avec score de 
+                  santé financière, tendances et prédictions.
+                </p>
+                <Button 
+                  onClick={loadSpendingAnalysis}
+                  disabled={loadingAnalysis}
+                  className="w-full bg-purple-600 hover:bg-purple-700"
+                >
+                  {loadingAnalysis ? (
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  ) : (
+                    <BarChart3 className="w-4 h-4 mr-2" />
+                  )}
+                  Analyser
+                </Button>
+              </CardContent>
+            </Card>
+          </PlanGuard>
         </div>
 
         {/* Monthly Report Results */}
