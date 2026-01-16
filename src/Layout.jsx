@@ -33,20 +33,14 @@ export default function Layout({ children, currentPageName }) {
     const loadUser = async () => {
       try {
         const userData = await base44.auth.me();
-        
-        // Redirect to plan selection if no plan selected
-        if (!userData.subscription_plan && currentPageName !== 'PlanSelection') {
-          window.location.href = createPageUrl('PlanSelection');
-          return;
-        }
-        
         setUser(userData);
       } catch (error) {
-        // User not authenticated, ignore
+        // User not authenticated, that's fine
+        // Pages themselves handle redirects via AuthGuard
       }
     };
     loadUser();
-  }, [currentPageName]);
+  }, []);
 
   const handleLogout = () => {
     base44.auth.logout();
