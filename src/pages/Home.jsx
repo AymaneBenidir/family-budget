@@ -10,7 +10,18 @@ export default function Home() {
       const isAuthenticated = await base44.auth.isAuthenticated();
       
       if (isAuthenticated) {
-        window.location.href = createPageUrl('Dashboard');
+        try {
+          const user = await base44.auth.me();
+          
+          // Check if user has selected a plan
+          if (!user.plan) {
+            window.location.href = createPageUrl('SelectPlan');
+          } else {
+            window.location.href = createPageUrl('Dashboard');
+          }
+        } catch (error) {
+          window.location.href = createPageUrl('Landing');
+        }
       } else {
         window.location.href = createPageUrl('Landing');
       }

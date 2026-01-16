@@ -30,8 +30,23 @@ export default function Layout({ children, currentPageName }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    base44.auth.me().then(setUser).catch(() => {});
-  }, []);
+    const loadUser = async () => {
+      try {
+        const userData = await base44.auth.me();
+        
+        // Redirect to plan selection if no plan selected
+        if (!userData.plan && currentPageName !== 'SelectPlan') {
+          window.location.href = createPageUrl('SelectPlan');
+          return;
+        }
+        
+        setUser(userData);
+      } catch (error) {
+        // User not authenticated, ignore
+      }
+    };
+    loadUser();
+  }, [currentPageName]);
 
   const handleLogout = () => {
     base44.auth.logout();
