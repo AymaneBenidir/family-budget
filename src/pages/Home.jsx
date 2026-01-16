@@ -10,19 +10,23 @@ export default function Home() {
       const isAuthenticated = await base44.auth.isAuthenticated();
       
       if (isAuthenticated) {
+        // Check if user has completed onboarding
         try {
           const user = await base44.auth.me();
           
-          // Check if user has selected a plan
-          if (!user.plan) {
-            window.location.href = createPageUrl('SelectPlan');
+          if (!user.onboarding_completed || !user.subscription_plan) {
+            // Redirect to plan selection if onboarding not completed
+            window.location.href = createPageUrl('PlanSelection');
           } else {
+            // User is authenticated and has selected a plan
             window.location.href = createPageUrl('Dashboard');
           }
         } catch (error) {
+          console.error('Error checking user:', error);
           window.location.href = createPageUrl('Landing');
         }
       } else {
+        // Not authenticated - show landing page
         window.location.href = createPageUrl('Landing');
       }
     };
