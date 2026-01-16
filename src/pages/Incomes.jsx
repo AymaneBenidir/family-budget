@@ -216,3 +216,11 @@ export default function Incomes() {
     </div>
   );
 }
+
+export default function Incomes() {
+  return (
+    <AuthGuard requirePlan={true}>
+      <IncomesContent />
+    </AuthGuard>
+  );
+}

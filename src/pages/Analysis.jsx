@@ -408,3 +408,11 @@ export default function Analysis() {
     </div>
   );
 }
+
+export default function Analysis() {
+  return (
+    <AuthGuard requirePlan={true}>
+      <AnalysisContent />
+    </AuthGuard>
+  );
+}

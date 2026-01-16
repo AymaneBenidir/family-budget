@@ -17,6 +17,7 @@ import {
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle 
 } from "@/components/ui/alert-dialog";
 import ExpenseForm from '@/components/forms/ExpenseForm';
+import AuthGuard from '@/components/AuthGuard';
 
 const CATEGORIES = {
   food: { label: 'Alimentation', icon: '🍽️', color: 'bg-emerald-100 text-emerald-700' },
@@ -31,7 +32,7 @@ const CATEGORIES = {
   other: { label: 'Autres', icon: '📦', color: 'bg-slate-100 text-slate-700' }
 };
 
-export default function Expenses() {
+function ExpensesContent() {
   const queryClient = useQueryClient();
   const [formOpen, setFormOpen] = useState(false);
   const [editingExpense, setEditingExpense] = useState(null);
@@ -254,5 +255,13 @@ export default function Expenses() {
         </AlertDialogContent>
       </AlertDialog>
     </div>
+  );
+}
+
+export default function Expenses() {
+  return (
+    <AuthGuard requirePlan={true}>
+      <ExpensesContent />
+    </AuthGuard>
   );
 }

@@ -317,3 +317,11 @@ export default function Goals() {
     </div>
   );
 }
+
+export default function Goals() {
+  return (
+    <AuthGuard requirePlan={true}>
+      <GoalsContent />
+    </AuthGuard>
+  );
+}

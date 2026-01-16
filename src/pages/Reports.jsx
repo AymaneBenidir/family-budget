@@ -15,8 +15,9 @@ import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { cn } from "@/lib/utils";
 import PlanGuard from '../components/PlanGuard';
+import AuthGuard from '@/components/AuthGuard';
 
-export default function Reports() {
+function ReportsContent() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -439,5 +440,13 @@ export default function Reports() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function Reports() {
+  return (
+    <AuthGuard requirePlan={true}>
+      <ReportsContent />
+    </AuthGuard>
   );
 }
