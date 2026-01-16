@@ -13,8 +13,9 @@ import RecentTransactions from '@/components/dashboard/RecentTransactions';
 import MonthlyTrend from '@/components/dashboard/MonthlyTrend';
 import ExpenseForm from '@/components/forms/ExpenseForm';
 import IncomeForm from '@/components/forms/IncomeForm';
+import AuthGuard from '@/components/AuthGuard';
 
-export default function Dashboard() {
+function DashboardContent() {
   const queryClient = useQueryClient();
   const [expenseFormOpen, setExpenseFormOpen] = useState(false);
   const [incomeFormOpen, setIncomeFormOpen] = useState(false);
@@ -170,5 +171,13 @@ export default function Dashboard() {
         onSubmit={createIncome.mutateAsync}
       />
     </div>
+  );
+}
+
+export default function Dashboard() {
+  return (
+    <AuthGuard requirePlan={true}>
+      <DashboardContent />
+    </AuthGuard>
   );
 }
