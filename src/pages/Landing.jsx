@@ -100,13 +100,24 @@ export default function Landing() {
               transparente et sans endettement
             </p>
 
-            <Button 
-              onClick={handleGetStarted}
-              size="lg"
-              className="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white text-lg px-8 py-6 rounded-xl shadow-xl hover:shadow-2xl transition-all"
-            >
-              Commencer gratuitement
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                onClick={handleGetStarted}
+                size="lg"
+                className="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white text-lg px-8 py-6 rounded-xl shadow-xl hover:shadow-2xl transition-all"
+              >
+                Commencer gratuitement
+              </Button>
+              
+              <Button 
+                onClick={() => window.location.href = createPageUrl('SignIn')}
+                size="lg"
+                variant="outline"
+                className="border-2 border-teal-600 text-teal-600 hover:bg-teal-50 text-lg px-8 py-6 rounded-xl"
+              >
+                Se connecter
+              </Button>
+            </div>
 
             <p className="text-sm text-slate-500 mt-4">
               Aucune carte bancaire requise • Configuration en 2 minutes

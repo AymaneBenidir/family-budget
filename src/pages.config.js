@@ -3,8 +3,9 @@ import Dashboard from './pages/Dashboard';
 import Expenses from './pages/Expenses';
 import Goals from './pages/Goals';
 import Incomes from './pages/Incomes';
-import Reports from './pages/Reports';
 import Landing from './pages/Landing';
+import Reports from './pages/Reports';
+import SignIn from './pages/SignIn';
 import __Layout from './Layout.jsx';
 
 
@@ -14,8 +15,9 @@ export const PAGES = {
     "Expenses": Expenses,
     "Goals": Goals,
     "Incomes": Incomes,
-    "Reports": Reports,
     "Landing": Landing,
+    "Reports": Reports,
+    "SignIn": SignIn,
 }
 
 export const pagesConfig = {
