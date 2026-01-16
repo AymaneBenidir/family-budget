@@ -6,6 +6,7 @@ import Incomes from './pages/Incomes';
 import Landing from './pages/Landing';
 import Reports from './pages/Reports';
 import SignIn from './pages/SignIn';
+import Home from './pages/Home';
 import __Layout from './Layout.jsx';
 
 
@@ -18,6 +19,7 @@ export const PAGES = {
     "Landing": Landing,
     "Reports": Reports,
     "SignIn": SignIn,
+    "Home": Home,
 }
 
 export const pagesConfig = {
