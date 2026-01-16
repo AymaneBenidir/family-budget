@@ -5,7 +5,7 @@ import { Lock, Sparkles } from 'lucide-react';
 import { createPageUrl } from '../utils';
 
 export default function PlanGuard({ children, requiredPlan = 'premium', user }) {
-  const hasPremium = user?.plan === 'premium';
+  const hasPremium = user?.subscription_plan === 'premium';
 
   if (requiredPlan === 'premium' && !hasPremium) {
     return (

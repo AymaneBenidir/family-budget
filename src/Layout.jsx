@@ -35,8 +35,8 @@ export default function Layout({ children, currentPageName }) {
         const userData = await base44.auth.me();
         
         // Redirect to plan selection if no plan selected
-        if (!userData.plan && currentPageName !== 'SelectPlan') {
-          window.location.href = createPageUrl('SelectPlan');
+        if (!userData.subscription_plan && currentPageName !== 'PlanSelection') {
+          window.location.href = createPageUrl('PlanSelection');
           return;
         }
         
